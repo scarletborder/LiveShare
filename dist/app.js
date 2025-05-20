@@ -1,17 +1,7 @@
-<<<<<<< HEAD
-define("widget", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.messagesList = exports.fileReceiveStatus = exports.fileReceiveProgressBar = exports.fileNameReceive = exports.fileReceiveProgressContainer = exports.receivedFilesList = exports.receiveModuleDiv = exports.cancelSendBtn = exports.fileSendStatus = exports.fileSendProgressBar = exports.fileNameSend = exports.fileSendProgressContainer = exports.sendBtn = exports.fileInput = exports.textInput = exports.sendFileContainer = exports.sendTextContainer = exports.sendTypeRadios = exports.sendModuleDiv = exports.disconnectBtn = exports.connectedViewDiv = exports.clearLogBtn = exports.connectionLog = exports.confirmRemoteSignalBtn = exports.remoteSignalText = exports.copyLocalSignalBtn = exports.localSignalText = exports.remoteSignalGroup = exports.localSignalGroup = exports.signalInputContainer = exports.roleDisplay = exports.connectionSetupDiv = exports.backBtn = exports.clientBtn = exports.hostBtn = exports.roleSelectionDiv = exports.stunServerListElement = exports.addStunBtn = exports.stunServerInput = exports.currentStunServerDisplay = exports.toggleSettingsBtn = exports.settingsContent = exports.settingsModule = void 0;
-=======
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 define("widget", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.messagesList = exports.fileReceiveStatus = exports.fileReceiveProgressBar = exports.fileNameReceive = exports.fileReceiveProgressContainer = exports.receivedFilesList = exports.receiveModuleDiv = exports.cancelSendBtn = exports.fileSendStatus = exports.fileSendProgressBar = exports.fileNameSend = exports.fileSendProgressContainer = exports.sendBtn = exports.fileInput = exports.textInput = exports.sendFileContainer = exports.sendTextContainer = exports.sendTypeRadios = exports.sendModuleDiv = exports.modalTitle = exports.qrVideo = exports.cameraContainer = exports.qrcodeContainer = exports.modalClose = exports.qrModal = exports.disconnectBtn = exports.connectedViewDiv = exports.clearLogBtn = exports.connectionLog = exports.confirmRemoteSignalBtn = exports.remoteSignalText = exports.scanQrCodeBtn = exports.qrcodeLocalSignalBtn = exports.copyLocalSignalBtn = exports.localSignalText = exports.remoteSignalGroup = exports.localSignalGroup = exports.signalInputContainer = exports.roleDisplay = exports.connectionSetupDiv = exports.backBtn = exports.clientBtn = exports.hostBtn = exports.roleSelectionDiv = exports.stunServerListElement = exports.addStunBtn = exports.stunServerInput = exports.currentStunServerDisplay = exports.toggleSettingsBtn = exports.settingsContent = exports.settingsModule = void 0;
->>>>>>> ece8f4f (upload)
     exports.logToScreen = logToScreen;
     exports.setSignalInputOrder = setSignalInputOrder;
     exports.addReceivedFileToUI = addReceivedFileToUI;
@@ -37,19 +27,14 @@ define("widget", ["require", "exports"], function (require, exports) {
     exports.remoteSignalGroup = document.getElementById("remoteSignalGroup");
     exports.localSignalText = document.getElementById("localSignal");
     exports.copyLocalSignalBtn = document.getElementById("copyLocalSignalBtn");
-<<<<<<< HEAD
-=======
     exports.qrcodeLocalSignalBtn = document.getElementById("qrcodeLocalSignalBtn");
     exports.scanQrCodeBtn = document.getElementById("scanQrCodeBtn");
->>>>>>> ece8f4f (upload)
     exports.remoteSignalText = document.getElementById("remoteSignal");
     exports.confirmRemoteSignalBtn = document.getElementById("confirmRemoteSignalBtn");
     exports.connectionLog = document.getElementById("connectionLog");
     exports.clearLogBtn = document.getElementById("clearLogBtn");
     exports.connectedViewDiv = document.getElementById("connectedView");
     exports.disconnectBtn = document.getElementById("disconnectBtn");
-<<<<<<< HEAD
-=======
     // QR模态框元素
     exports.qrModal = document.getElementById("qrModal");
     exports.modalClose = document.querySelector(".close-modal");
@@ -57,7 +42,6 @@ define("widget", ["require", "exports"], function (require, exports) {
     exports.cameraContainer = document.getElementById("camera-container");
     exports.qrVideo = document.getElementById("qr-video");
     exports.modalTitle = document.getElementById("modal-title");
->>>>>>> ece8f4f (upload)
     // Send
     exports.sendModuleDiv = document.getElementById("sendModule");
     exports.sendTypeRadios = document.querySelectorAll('input[name="sendType"]');
@@ -131,15 +115,6 @@ define("widget", ["require", "exports"], function (require, exports) {
         messageTime.textContent = new Date().toLocaleTimeString();
         const copyBtn = document.createElement("button");
         copyBtn.className = "copy-btn";
-<<<<<<< HEAD
-        copyBtn.textContent = "复制";
-        copyBtn.onclick = () => {
-            navigator.clipboard.writeText(content)
-                .then(() => {
-                copyBtn.textContent = "已复制";
-                setTimeout(() => {
-                    copyBtn.textContent = "复制";
-=======
         copyBtn.textContent = "Copy";
         copyBtn.onclick = () => {
             navigator.clipboard.writeText(content)
@@ -147,7 +122,6 @@ define("widget", ["require", "exports"], function (require, exports) {
                 copyBtn.textContent = "Copied";
                 setTimeout(() => {
                     copyBtn.textContent = "Copy";
->>>>>>> ece8f4f (upload)
                 }, 2000);
             })
                 .catch(err => console.error('Failed to copy:', err));
@@ -653,19 +627,10 @@ define("logic", ["require", "exports", "widget"], function (require, exports, wi
         }
     }
 });
-<<<<<<< HEAD
 define("app", ["require", "exports", "widget", "logic"], function (require, exports, widget_2, logic_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.main = main;
-=======
-define("app", ["require", "exports", "widget", "logic", "jsqr", "qrcode"], function (require, exports, widget_2, logic_1, jsqr_1, qrcode_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.main = main;
-    jsqr_1 = __importDefault(jsqr_1);
-    qrcode_1 = __importDefault(qrcode_1);
->>>>>>> ece8f4f (upload)
     // --- Configuration ---
     const DEFAULT_STUN_SERVER = "stun:stun.l.google.com:19302";
     const STUN_SERVERS_STORAGE_KEY = "webrtcP2PStunServers";
@@ -882,109 +847,6 @@ define("app", ["require", "exports", "widget", "logic", "jsqr", "qrcode"], funct
         fileItem.appendChild(downloadBtn);
         receivedFilesList.appendChild(fileItem);
     }
-<<<<<<< HEAD
-=======
-    // --- QR Code Functions ---
-    widget_2.qrcodeLocalSignalBtn.onclick = () => {
-        if (localSignalText.value) {
-            // 显示模态框并设置标题
-            widget_2.qrModal.style.display = "block";
-            widget_2.modalTitle.textContent = "Your Signal QR Code";
-            widget_2.qrcodeContainer.innerHTML = ""; // 清空容器
-            widget_2.qrcodeContainer.classList.remove("hidden");
-            widget_2.cameraContainer.classList.add("hidden");
-            // 生成QR码
-            const qr = (0, qrcode_1.default)(0, 'H');
-            try {
-                qr.addData(localSignalText.value);
-                qr.make();
-                widget_2.qrcodeContainer.innerHTML = qr.createImgTag(5);
-                (0, widget_2.logToScreen)("QR code for your signal has been generated.");
-            }
-            catch (error) {
-                (0, widget_2.logToScreen)(`Error generating QR code: ${error.message}`);
-                widget_2.qrcodeContainer.innerHTML = "<p>Error: Signal data too large for QR code.</p>";
-            }
-        }
-        else {
-            (0, widget_2.logToScreen)("No local signal generated yet to display as QR code.");
-        }
-    };
-    widget_2.scanQrCodeBtn.onclick = async () => {
-        widget_2.qrModal.style.display = "block";
-        widget_2.modalTitle.textContent = "Scan Peer's Signal QR Code";
-        widget_2.qrcodeContainer.classList.add("hidden");
-        widget_2.cameraContainer.classList.remove("hidden");
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-            widget_2.qrVideo.srcObject = stream;
-            widget_2.qrVideo.play();
-            // 创建canvas用于处理视频帧
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            // 定期扫描视频帧
-            const scanInterval = setInterval(() => {
-                if (widget_2.qrVideo.readyState === widget_2.qrVideo.HAVE_ENOUGH_DATA) {
-                    canvas.height = widget_2.qrVideo.videoHeight;
-                    canvas.width = widget_2.qrVideo.videoWidth;
-                    context?.drawImage(widget_2.qrVideo, 0, 0, canvas.width, canvas.height);
-                    const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
-                    if (imageData) {
-                        const code = (0, jsqr_1.default)(imageData.data, imageData.width, imageData.height, {
-                            inversionAttempts: "dontInvert",
-                        });
-                        if (code) {
-                            // 找到QR码
-                            // jsQR library returns code.data as a string, not Uint8ClampedArray
-                            remoteSignalText.value = code.data.toString();
-                            (0, widget_2.logToScreen)("QR code scanned successfully!");
-                            // 停止视频
-                            clearInterval(scanInterval);
-                            widget_2.qrVideo.pause();
-                            if (widget_2.qrVideo.srcObject) {
-                                widget_2.qrVideo.srcObject.getTracks().forEach(track => track.stop());
-                            }
-                            widget_2.qrModal.style.display = "none";
-                        }
-                    }
-                }
-            }, 100);
-            // 当模态框关闭时停止扫描
-            widget_2.modalClose.onclick = () => {
-                clearInterval(scanInterval);
-                widget_2.qrVideo.pause();
-                if (widget_2.qrVideo.srcObject) {
-                    widget_2.qrVideo.srcObject.getTracks().forEach(track => track.stop());
-                }
-                widget_2.qrModal.style.display = "none";
-            };
-        }
-        catch (error) {
-            (0, widget_2.logToScreen)(`Error accessing camera: ${error.message}`);
-            widget_2.cameraContainer.innerHTML = "<p>Error: Cannot access camera.</p>";
-        }
-    };
-    // 关闭模态框
-    widget_2.modalClose.onclick = () => {
-        widget_2.qrModal.style.display = "none";
-        // 停止视频
-        widget_2.qrVideo.pause();
-        if (widget_2.qrVideo.srcObject) {
-            widget_2.qrVideo.srcObject.getTracks().forEach(track => track.stop());
-        }
-    };
-    // 点击模态框外部关闭它
-    window.onclick = (event) => {
-        if (event.target === widget_2.qrModal) {
-            widget_2.qrModal.style.display = "none";
-            // 停止视频
-            widget_2.qrVideo.pause();
-            if (widget_2.qrVideo.srcObject) {
-                widget_2.qrVideo.srcObject.getTracks().forEach(track => track.stop());
-            }
-        }
-    };
->>>>>>> ece8f4f (upload)
     // --- Initialization ---
     function main() {
         (0, logic_1.loadStunServers)();
@@ -1037,3 +899,4 @@ define("app", ["require", "exports", "widget", "logic", "jsqr", "qrcode"], funct
         }
     });
 });
+//# sourceMappingURL=app.js.map
