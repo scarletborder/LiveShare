@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC P2P Transfer</title>
+    <link rel="stylesheet" href="dist/app.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>WebRTC P2P Text & File Transfer</h1>
+        <p>Author: <a href="https://blog.scarletborder.cn/">scarletborder</a></p>
+
+        <!-- Settings Module -->
+        <div id="settingsModule" class="module">
+            <div class="module-header">
+                <h2>Settings</h2>
+                <button id="toggleSettingsBtn" class="toggle-btn">▼</button>
+            </div>
+            <div id="settingsContent" class="module-content">
+                <div>
+                    <strong>Currently Using STUN:</strong> <span id="currentStunServerDisplay"></span>
+                </div>
+                <label for="stunServerInput">Add STUN/TURN Server (e.g., stun:stun.l.google.com:19302):</label>
+                <input type="text" id="stunServerInput" placeholder="stun:server.example.com:port">
+                <button id="addStunBtn">Add Server</button>
+                <h3>Available STUN/TURN Servers:</h3>
+                <ul id="stunServerList">
+                    <!-- STUN servers will be listed here -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Connection Module -->
+        <div id="connectionModule" class="module">
+            <h2>Connection</h2>
+            <div id="roleSelection">
+                <button id="hostBtn">Become HOST</button>
+                <button id="clientBtn">Become CLIENT</button>
+            </div>
+
+            <div id="connectionSetup" class="hidden">
+                <button id="backBtn" class="back-btn"><i>←</i> 返回选择角色</button>
+                <h3 id="roleDisplay">Role: </h3>
+                <!-- Container for signal inputs to allow reordering -->
+                <div id="signalInputContainer">
+                    <div id="localSignalGroup" class="signal-group">
+                        <label for="localSignal">Your Signal (Copy and send to peer):</label>
+                        <textarea id="localSignal" readonly></textarea>
+                        <button id="copyLocalSignalBtn">Copy My Signal</button>
+                    </div>
+                    <div id="remoteSignalGroup" class="signal-group">
+                        <label for="remoteSignal">Peer's Signal (Paste here):</label>
+                        <textarea id="remoteSignal"></textarea>
+                    </div>
+                </div>
+                <button id="confirmRemoteSignalBtn" class="">Connect</button>
+            </div>
+
+            <div id="connectedView" class="hidden">
+                <p><strong>Status: Connected!</strong></p>
+                <button id="disconnectBtn">Disconnect</button>
+            </div>
+
+            <!-- Activity Log - MODIFIED: Moved here to be always visible within Connection Module -->
+            <div style="margin-top: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Activity Log:</h3>
+                    <button id="clearLogBtn" class="clear-log-btn">Clear Log</button>
+                </div>
+                <div id="connectionLog" class="log-area"></div>
+            </div>
+        </div>
+
+        <!-- Send Module -->
+        <div id="sendModule" class="module hidden">
+            <h2>Send Data</h2>
+            <div>
+                <label>
+                    <input type="radio" name="sendType" value="text" checked> Send Text
+                </label>
+                <label>
+                    <input type="radio" name="sendType" value="file"> Send File
+                </label>
+            </div>
+
+            <div id="sendTextContainer">
+                <label for="textInput">Text to send:</label>
+                <textarea id="textInput"></textarea>
+            </div>
+
+            <div id="sendFileContainer" class="hidden">
+                <label for="fileInput">Choose file:</label>
+                <input type="file" id="fileInput">
+                <div id="fileSendProgressContainer" class="hidden">
+                    <p>Sending: <span id="fileNameSend"></span></p>
+                    <div class="progress-bar">
+                        <div id="fileSendProgressBar" class="progress-bar-fill"></div>
+                    </div>
+                    <span id="fileSendStatus">0%</span>
+                    <button id="cancelSendBtn">Cancel Send</button>
+                </div>
+            </div>
+            <button id="sendBtn">Send</button>
+        </div>
+
+        <!-- Receive Module -->
+        <div id="receiveModule" class="module hidden">
+            <h2>Received Data</h2>
+            <div class="messages-container">
+                <h3>Messages</h3>
+                <div class="messages-list">
+                    <!-- Messages will be listed here -->
+                </div>
+            </div>
+            <h3>Received Files:</h3>
+            <div id="receivedFilesList">
+                <!-- Received files will be listed here -->
+            </div>
+            <div id="fileReceiveProgressContainer" class="hidden">
+                <p>Receiving: <span id="fileNameReceive"></span></p>
+                <div class="progress-bar">
+                    <div id="fileReceiveProgressBar" class="progress-bar-fill"></div>
+                </div>
+                <span id="fileReceiveStatus">0%</span>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script type="module" src="dist/bundle.js"></script>
+
+    <script>
+        require(["app"], function (app) {
+            app.main();
+        });
+    </script>
+</body>
+
+</html>

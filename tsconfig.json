@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        // 输出语法层级
+        "target": "ES2022",
+
+        // 同时加载 DOM 和 ES2022 的类型声明，避免 Promise/includes 报错
+        "lib": [ "DOM", "ES2022" ],
+
+        // 必须用 AMD（或 System）模式，才能让 outFile 把所有 import/require 合并进去
+        "module": "amd",
+
+        // 把编译后的所有代码合并到同一个文件里
+        "outFile": "./dist/bundle.js",
+
+        // (可选) 代码检查、路径解析等
+        "strict": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true
+    },
+
+    // 包含你所有的 .ts 文件
+    "include": [ "src/**/*.ts" ]
+}

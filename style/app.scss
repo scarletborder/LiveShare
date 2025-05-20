@@ -1,0 +1,289 @@
+@use 'colors' as *;
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: $background-color;
+    color: $text-color;
+}
+
+.container {
+    background-color: $background-color;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px $shadow-color;
+}
+
+h2,
+h3 {
+    color: $primary-color;
+}
+
+a {
+    color: $primary-color;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+button {
+    background-color: $primary-color;
+    color: $btn_color;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    background-color: $primary-hover;
+}
+
+button:disabled {
+    background-color: $disabled-color;
+    cursor: not-allowed;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.module {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $divider-color;
+}
+
+.module:last-child {
+    border-bottom: none;
+}
+
+.log-area {
+    background-color: $log-bg-color;
+    color: $log-text-color;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid $divider-color;
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: $progress-bg;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 10px;
+    margin: 5px 0;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: $progress-fill;
+    width: 0%;
+    transition: width 0.1s ease-in-out;
+}
+
+.stun-server-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+/* Style for signal groups to ensure proper spacing */
+.signal-group {
+    margin-bottom: 15px;
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: $module-bg;
+    border-radius: 4px 4px 0 0;
+
+    h2 {
+        margin: 0;
+    }
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: $toggle-btn-color;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $toggle-btn-hover;
+    }
+}
+
+.module-content {
+    padding: 15px;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    overflow: hidden;
+    opacity: 1;
+    max-height: 1000px; // 设置一个足够大的值
+
+    &.collapsed {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        opacity: 0;
+    }
+}
+
+.back-btn {
+    background-color: $module-bg;
+    color: $text-color;
+    border: 1px solid $border-color;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: $primary-color;
+        color: $btn_color;
+        border-color: $primary-color;
+    }
+
+    i {
+        margin-right: 5px;
+    }
+}
+
+.clear-log-btn {
+    background-color: #dc3545;
+    color: $btn_color;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: #c82333;
+    }
+
+    &.confirm {
+        background-color: #ffc107;
+        color: #000;
+
+        &:hover {
+            background-color: #e0a800;
+        }
+    }
+}
+
+.messages-container {
+    margin-bottom: 20px;
+}
+
+.messages-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: $module-bg;
+}
+
+.message-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    padding: 10px;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .message-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.9em;
+
+        .message-type {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .message-type.send {
+            background-color: rgba($primary-color, 0.2);
+            color: $primary-color;
+        }
+
+        .message-type.receive {
+            background-color: rgba($progress-fill, 0.2);
+            color: $progress-fill;
+        }
+
+        .message-time {
+            color: $toggle-btn-color;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: $toggle-btn-color;
+            cursor: pointer;
+            padding: 2px 5px;
+            font-size: 0.9em;
+            transition: color 0.2s;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+
+    .message-content {
+        word-break: break-all;
+        white-space: pre-wrap;
+    }
+}
